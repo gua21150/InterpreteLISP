@@ -30,5 +30,27 @@ public class FuncionesLisp {
 
     }
 
-    public boolean menorq()
+    public boolean menorq(Double a, Double b){
+
+    }
+
+    public boolean mayorq(Double a, Double b){
+
+    }
+
+    public Double suma(Double a, Double b){
+
+    }
+
+    public Double resta(Double a, Double b){
+
+    }
+
+    public Double multi(Double a, Double b){
+
+    }
+
+    public Double div(Double a, Double b){
+
+    }
 }

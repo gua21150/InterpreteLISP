@@ -1,47 +1,36 @@
+import java.io.*;
 import java.util.ArrayList;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.Scanner;
 
 public class Read {
 
-    public String readFile(){
-        int contador=0;
-        int tamaño=0;
-        String string ="";
-        BufferedReader br = null;
-
+    public ArrayList<String> readFile(ArrayList<String> expression){
         try {
-            String sCurrentLine;
-            File file = new File("datosLisp.txt");
-            br = new BufferedReader(new FileReader(file.getAbsoluteFile()));
-
-            while ((sCurrentLine = br.readLine()) != null) {
-                tamaño++;
+            File myObj = new File("lispExpression.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                expression.add(data);
             }
-            br = new BufferedReader(new FileReader(file));
-
-            while ((sCurrentLine = br.readLine()) != null) {
-                string = string.concat(sCurrentLine);
-            }
-
-            return string;
-        } catch (IOException e) {
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
             e.printStackTrace();
-        } finally {
-            try {
-                if (br != null)br.close();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
         }
-        return null;
+        return expression;
     }
 
-    public ArrayList<String> lista(String params){
-        // Code
-        ArrayList<String> bebe = new ArrayList<String>();
-        return bebe;
+    public ArrayList<Character> getCharactersList(ArrayList<String> expression){
+        ArrayList<Character> charactersExpression = new ArrayList<>(); // lista temporal
+        try {
+            for (String str: expression) {
+                for (int i = 0; i < str.length(); i++) {
+                    charactersExpression.add(str.charAt(i)); // se agregan los caracteres
+                }
+            }
+        } catch(Exception e) {
+            System.out.println("new error occurred" +e.getMessage());
+        }
+        return charactersExpression;
     }
 }

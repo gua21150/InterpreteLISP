@@ -20,7 +20,7 @@ public class Read {
         return expression;
     }
 
-    public ArrayList<Character> getCharactersList(ArrayList<String> expression){
+    private ArrayList<Character> getCharactersList(ArrayList<String> expression){
         ArrayList<Character> charactersExpression = new ArrayList<>(); // lista temporal
         try {
             for (String str: expression) {
@@ -32,5 +32,38 @@ public class Read {
             System.out.println("new error occurred" +e.getMessage());
         }
         return charactersExpression;
+    }
+
+    public ArrayList<String> tokens(ArrayList<String> expression) {
+        String temp = "";
+        ArrayList<Character> characters = new ArrayList<>(); // lista temporal que contiene los caracteres
+        this.readFile(expression);                           // lectura del archivo
+        characters.addAll(this.getCharactersList(expression));     // se convierte la lista a una lista de caracteres
+        expression.clear();
+
+        for (Character chars : characters) {
+            if (chars == '('){
+                expression.add(chars+"");
+            } else {
+                if(chars==')') {
+                    if(temp!="") {
+                        expression.add(temp);
+                        temp="";
+                    }
+                    expression.add(chars+"");
+                }
+                else {
+                    if (chars != ' ') {
+                        temp += chars+"";
+                    } else {
+                        if (chars == ' ' && temp!="") {
+                            expression.add(temp);
+                            temp = "";
+                        }
+                    }
+                }
+            }
+        }
+        return expression;
     }
 }

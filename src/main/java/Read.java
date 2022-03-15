@@ -3,10 +3,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Read {
+    private Read() {
+    }
 
-    public ArrayList<String> readFile(ArrayList<String> expression){
+    public static ArrayList<String> readFile(String nombre, ArrayList<String> expression){
         try {
-            File myObj = new File("lispExpression.txt");
+            File myObj = new File(nombre);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
@@ -17,10 +19,11 @@ public class Read {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        expression=tokens(expression);
         return expression;
     }
 
-    private ArrayList<Character> getCharactersList(ArrayList<String> expression){
+    private static ArrayList<Character> getCharactersList(ArrayList<String> expression){
         ArrayList<Character> charactersExpression = new ArrayList<>(); // lista temporal
         try {
             for (String str: expression) {
@@ -30,40 +33,66 @@ public class Read {
             }
         } catch(Exception e) {
             System.out.println("new error occurred" +e.getMessage());
-        }
+        }        
         return charactersExpression;
     }
 
-    public ArrayList<String> tokens(ArrayList<String> expression) {
+    private static ArrayList<String> tokens(ArrayList<String> expression) {        
         String temp = "";
-        ArrayList<Character> characters = new ArrayList<>(); // lista temporal que contiene los caracteres
-        this.readFile(expression);                           // lectura del archivo
-        characters.addAll(this.getCharactersList(expression));     // se convierte la lista a una lista de caracteres
+        ArrayList<Character> characters = new ArrayList<>(); // lista temporal que contiene los caracteres                                                            
+        characters.addAll(getCharactersList(expression));   // se convierte la lista a una lista de caracteres
         expression.clear();
 
-        for (Character chars : characters) {
-            if (chars == '('){
-                expression.add(chars+"");
-            } else {
-                if(chars==')') {
-                    if(temp!="") {
-                        expression.add(temp);
-                        temp="";
-                    }
+        if(parentesisCorrectos(characters)==true) {
+            for (Character chars : characters) {
+                if (chars == '('){
+                    if(!temp.isEmpty()){
+                        expression.add(temp); temp="";
+                    }                        
                     expression.add(chars+"");
-                }
-                else {
-                    if (chars != ' ') {
-                        temp += chars+"";
-                    } else {
-                        if (chars == ' ' && temp!="") {
+                } else {
+                    if(chars==')') {
+                        if(!temp.equals("")) {
                             expression.add(temp);
-                            temp = "";
+                            temp="";
+                        }
+                        expression.add(chars+"");
+                    }
+                    else {
+                        if (Character.isLetterOrDigit(chars)) {
+                            temp += chars+"";
+                        } else {                            
+                            if(!Character.isLetterOrDigit(chars)&&!Character.isWhitespace(chars)){
+                                if(!temp.isEmpty()){
+                                    expression.add(temp); temp="";
+                                }                                    
+                                expression.add(chars+"");
+                            } else {
+                                if (!temp.equals("") && chars.equals(' ')) {
+                                    expression.add(temp);
+                                    temp = "";
+                                }
+                            }                                        
                         }
                     }
                 }
             }
-        }
+        } else 
+            expression.add("No operable");
+        
         return expression;
     }
+
+    private static boolean parentesisCorrectos(ArrayList<Character> expression) {
+        int parApertura = 0;
+        int parCerrar = 0;
+        for (Character character : expression) {
+            if(character.equals('('))
+                parApertura++;
+            else
+                if(character.equals(')'))
+                    parCerrar++;
+        }
+        return parApertura==parCerrar;
+    }    
 }

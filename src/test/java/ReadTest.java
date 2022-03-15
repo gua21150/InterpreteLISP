@@ -1,20 +1,19 @@
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReadTest {
-    Read reader = new Read();
+   
     ArrayList<String> list = new ArrayList<>();
     ArrayList<String> expectedList = new ArrayList<>();
     @Test
     void readFile() {
         expectedList.add("(+ 5 6 / (- 4  19))");
-        assertIterableEquals(expectedList, reader.readFile(list));
+        assertIterableEquals(expectedList, Read.readFile("lispExpression.txt",list));
     }
 
-    @Test
+    /*@Test
     void tokens() {
         expectedList.clear();
         expectedList.add("(");
@@ -28,6 +27,6 @@ class ReadTest {
         expectedList.add("19");
         expectedList.add(")");
         expectedList.add(")");
-        assertIterableEquals(expectedList, reader.tokens(list));
-    }
+        assertIterableEquals(expectedList, Read.tokens(list));
+    }*/
 }

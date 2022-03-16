@@ -19,5 +19,20 @@ public class Nodo {
     public Nodo(ArrayList<Nodo> v){
         lista=v;
         tipo=3;
-    }       
+    }
+    
+    public int getTipo() {
+    	return tipo;
+    }
+    
+    public float getDataF() {
+    	return dataF;
+    }
+    
+    public String getDataS() {
+    	return dataS;
+    }
+    public ArrayList<Nodo> getArrayListNodo() {
+    	return lista;
+    }
 }

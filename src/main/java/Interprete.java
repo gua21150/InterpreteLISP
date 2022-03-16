@@ -15,14 +15,21 @@ public class Interprete {
         
         ArrayList<Nodo> convertido = FuncionesLisp.StringToNodo(list);
         
-        ArrayList<Nodo> tok =  FuncionesLisp.convert(convertido);
+        ArrayList<Nodo> prueba = FuncionesLisp.pre(convertido);
+       
         
-        for (Nodo x: tok) {
+        //ArrayList<Nodo> tok =  FuncionesLisp.convert(convertido);
+        
+        
+        
+        for (Nodo x: prueba) {
             if (x.getTipo()==3) {
                 System.out.println("Comienza la sublista");
                 for (Nodo l: x.getArrayListNodo()) {
-                	System.out.print("En lista: ");
-                	System.out.println(l);
+                	
+                		System.out.print("Esta en lista: ");
+                		System.out.println(l.getDataS());
+                	
                 }
             }else if (x.getTipo()==1){
             	System.out.println(x.getDataF());

@@ -35,4 +35,6 @@ public class Nodo {
     public ArrayList<Nodo> getArrayListNodo() {
     	return lista;
     }
+    
+
 }

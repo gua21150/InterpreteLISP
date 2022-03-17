@@ -13,6 +13,7 @@ public class FuncionesLisp {
     
    // (defun fibonacci (n) (cond ((= n 1) 1) ((= n 2) 1) (T (+ (fibonacci (- n 1)) (fibonacci (- n 2))))))
 
+
     
     
     // Necesitamos convertir nuestra lista de tokens (tipo String) en tipo Nodo 
@@ -34,13 +35,12 @@ public class FuncionesLisp {
     	return listaNod;
     }
     
-    static ArrayList<Nodo> pre(ArrayList<Nodo> expression){
+    static ArrayList<Nodo> pre(ArrayList<Nodo> expression, int a){
     	ArrayList<Nodo> respuesta = new ArrayList<Nodo>();
     	
-    	expression.remove(0); // elimino el primer "("
     	
-    	
-    	for (int i = 0; i<expression.size(); i++) {
+    	// solo para llamarla la primera vez usamos a=1
+    	for (int i = a; i<expression.size(); i++) {
     		
     		
     		if (expression.get(i).getTipo() == 1) {
@@ -74,15 +74,23 @@ public class FuncionesLisp {
     						}else {
     							sublista.add(expression.get(i));
     						}
+   
     						
-    						
-    						
+    					}
+    					
+    					if (expression.get(i).getTipo() == 1) {
+    						sublista.add(expression.get(i));
     					}
     				}
     				Nodo Sublista = new Nodo(sublista);
     				respuesta.add(Sublista);
     			}else {
-    				respuesta.add(expression.get(i));
+    				if (expression.get(i).getDataS().equals(")")) {
+    					
+    				}else {
+    					respuesta.add(expression.get(i));
+    				}
+    				
     			}
     		}
 
@@ -93,6 +101,26 @@ public class FuncionesLisp {
     	}
     	
     	return respuesta;
+    }
+    
+    static ArrayList<Nodo> pre1(ArrayList<Nodo> expression){
+    	for (int i = 0; i<expression.size();i++) {
+    		if (expression.get(i).getTipo() == 3) { // encontro un arrayList
+    			/*
+    			Nodo s = new Nodo("(");
+    			expression.get(i).getArrayListNodo().set(0, s);
+    			
+    			Nodo sf = new Nodo(")");
+    			expression.get(i).getArrayListNodo().set(expression.get(i).getArrayListNodo().size()-1, sf);
+    			*/
+    			Nodo temp = new Nodo(pre(expression.get(i).getArrayListNodo(),0));
+    			expression.set(i, temp);
+    			
+    			Nodo tempFinal = new Nodo(pre1(expression.get(i).getArrayListNodo()));
+    			expression.set(i, tempFinal);
+    		}
+    	}
+    	return expression;
     }
     
     /*

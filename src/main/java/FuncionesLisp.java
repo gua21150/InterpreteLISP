@@ -106,13 +106,6 @@ public class FuncionesLisp {
     static ArrayList<Nodo> pre1(ArrayList<Nodo> expression){
     	for (int i = 0; i<expression.size();i++) {
     		if (expression.get(i).getTipo() == 3) { // encontro un arrayList
-    			/*
-    			Nodo s = new Nodo("(");
-    			expression.get(i).getArrayListNodo().set(0, s);
-    			
-    			Nodo sf = new Nodo(")");
-    			expression.get(i).getArrayListNodo().set(expression.get(i).getArrayListNodo().size()-1, sf);
-    			*/
     			Nodo temp = new Nodo(pre(expression.get(i).getArrayListNodo(),0));
     			expression.set(i, temp);
     			

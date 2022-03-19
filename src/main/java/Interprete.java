@@ -21,7 +21,7 @@ public class Interprete {
         ArrayList<Nodo> prueba = FuncionesLisp.pre(convertido,1);
         ArrayList<Nodo> prueba1 = FuncionesLisp.pre1(prueba);
         
-        System.out.println(prueba1.get(3).getArrayListNodo().get(0).getDataS());
+        System.out.println(prueba1.get(5).getArrayListNodo().get(0).getDataS());
         
         System.out.println("----------------------------------");
        

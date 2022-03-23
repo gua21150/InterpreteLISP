@@ -24,7 +24,7 @@ public class Read {
                 String data = myReader.nextLine();
                 expression.add(data);
             }
-            myReader.close();
+            
         } catch (FileNotFoundException e) {
             System.out.println("El archivo no se ha encontrado");            
         }

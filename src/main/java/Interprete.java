@@ -11,38 +11,57 @@ public class Interprete {
         String nameFile = "";
         int opcion = 0;
         System.out.println("Bienvenido al interprete LISP");
-        while(opcion!=2) {            
+        while(opcion!=3) {            
             System.out.println("--------------------------------------");
             System.out.println("Ingrese la opcion a realizar.");
-            System.out.println("1. Operar el interprete");
-            System.out.println("2. Salir");
+            System.out.println("1. Definir una función");
+            System.out.println("2. Evaluar una función o expresion aritmetica");
+            System.out.println("3. Salir");
             opcion=isNumberC(scan);
+            list.clear();
             if(opcion==1) {
-                System.out.println("Ingrese el nombre del archivo de texto.");
+                System.out.println("Ingrese el nombre del archivo de texto para definir la funcion");
                 nameFile = scanS.nextLine();
                 try {                
                     Read.readFile(nameFile, list);
                     if(list.get(0).equals("No operable")) {
                         System.out.println("Verifique el archivo, no se cuenta con la misma cantidad de parentesis");
                     } else {
-                        // se debe de hacer la llamada a lo que lee y evalua las expresiones
-                        ArrayList<Nodo> convertido = FuncionesLisp.StringToNodo(list);        
-                        ArrayList<Nodo> prueba = FuncionesLisp.pre(convertido,1);
-                        ArrayList<Nodo> prueba1 = FuncionesLisp.pre1(prueba);                        
+                        // se debe de hacer la llamada a lo que lee y define las expresiones                                               
                         Evaluador.defun(list);
                     }                    
                 } catch (Exception e) {
                     System.out.println("El archivo no existe");
                 }
-            } else {
-                System.out.println("Ten buen dia");
+            } else 
+            {
+                if(opcion==2) {
+                    System.out.println("Ingrese el nombre del archivo de texto para evaluar la funcion.");
+                    nameFile = scanS.nextLine();
+                    try {                
+                        Read.readFile(nameFile, list);
+                        if(list.get(0).equals("No operable")) {
+                            System.out.println("Verifique el archivo, no se cuenta con la misma cantidad de parentesis");
+                        } else {
+                            // se debe de hacer la llamada a lo que lee y evalua las expresiones
+                            ArrayList<Nodo> convertido = FuncionesLisp.StringToNodo(list);        
+                            ArrayList<Nodo> prueba = FuncionesLisp.pre(convertido,1);
+                            ArrayList<Nodo> prueba1 = FuncionesLisp.pre1(prueba);                        
+                            System.out.println(Evaluador.evaluar1(prueba1, prueba1).getDataF());
+                        }                    
+                    } catch (Exception e) {
+                        System.out.println("Se ha producido un error" + e.getMessage());
+                    }
+                }
+                else 
+                    System.out.println("Ten buen dia");
             }                         
         }
         scan.close();
         scanS.close();
     
         
-        
+        /*
         System.out.println("----------------------------------");
         
         ArrayList<Nodo> convertido = FuncionesLisp.StringToNodo(list);
@@ -63,7 +82,7 @@ public class Interprete {
         temperatura.add(parametro);
         
         
-        /*
+        
         ArrayList<Nodo> temperatura = new ArrayList<Nodo>();
         Nodo nombre = new Nodo("+");
         temperatura.add(nombre);
@@ -77,7 +96,7 @@ public class Interprete {
         temperatura.add(parametro1);
         
         System.out.println(temperatura.get(0).getDataS());
-        */
+        
         
         System.out.println(Evaluador.evaluar1(temperatura, temperatura).getDataF());
         

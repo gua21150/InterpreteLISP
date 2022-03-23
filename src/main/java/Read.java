@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 /**
- * Realiza la preparación del texto dentro de un archivo de texto 
+ * Realiza la preparaciÃ³n del texto dentro de un archivo de texto 
  * @author Mariel Guamuche
  * @version 2.0 
  */
@@ -13,8 +13,8 @@ public class Read {
     /**
      * Realiza la lectura del archivo validando la entrada del archivo de texto 
      * @param nombre: String del nombre del archivo
-     * @param expression: ArrayList<String> donde se desea colocar la expresión leída.
-     * @return ArrayList<String> con conversión de expresión
+     * @param expression: ArrayList<String> donde se desea colocar la expresiï¿½n leï¿½da.
+     * @return ArrayList<String> con conversiï¿½n de expresiï¿½n
      */
     public static ArrayList<String> readFile(String nombre, ArrayList<String> expression){
         try {

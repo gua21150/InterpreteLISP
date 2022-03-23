@@ -1,20 +1,46 @@
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.Scanner;
 
 public class Interprete {
 
     public static void main(String[] args) {
     	
         ArrayList<String> list = new ArrayList<>();          // lista temporal que recibe la expresión del archivo de texto        
-        //Stack stack1 = new Stack();        
-        Read.readFile("lispExpression.txt",list);
-        int cd = 0;
-        for (String str : list) {
-        	cd++;
-            System.out.println(str);
+        Scanner scan = new Scanner(System.in);
+        Scanner scanS = new Scanner(System.in);
+        String nameFile = "";
+        int opcion = 0;
+        System.out.println("Bienvenido al interprete LISP");
+        while(opcion!=2) {            
+            System.out.println("--------------------------------------");
+            System.out.println("Ingrese la opcion a realizar.");
+            System.out.println("1. Operar el interprete");
+            System.out.println("2. Salir");
+            opcion=isNumberC(scan);
+            if(opcion==1) {
+                System.out.println("Ingrese el nombre del archivo de texto.");
+                nameFile = scanS.nextLine();
+                try {                
+                    Read.readFile(nameFile, list);
+                    if(list.get(0).equals("No operable")) {
+                        System.out.println("Verifique el archivo, no se cuenta con la misma cantidad de parentesis");
+                    } else {
+                        // se debe de hacer la llamada a lo que lee y evalua las expresiones
+                        ArrayList<Nodo> convertido = FuncionesLisp.StringToNodo(list);        
+                        ArrayList<Nodo> prueba = FuncionesLisp.pre(convertido,1);
+                        ArrayList<Nodo> prueba1 = FuncionesLisp.pre1(prueba);                        
+                        Evaluador.defun(list);
+                    }                    
+                } catch (Exception e) {
+                    System.out.println("El archivo no existe");
+                }
+            } else {
+                System.out.println("Ten buen dia");
+            }                         
         }
-        System.out.println(cd);
-        
+        scan.close();
+        scanS.close();
+    
         
         
         System.out.println("----------------------------------");
@@ -78,12 +104,20 @@ public class Interprete {
                 			System.out.println(l.getDataF());
                 		}
                 	
-                }
-            }else if (x.getTipo()==1){
-            	System.out.println(x.getDataF());
-            }else {
-            	System.out.println(x.getDataS());
+        */
+    }
+
+    public static int isNumberC(Scanner scanner) {
+        boolean correct = false;
+        int a = 0;
+        while(correct==false){
+            try{
+                a = Integer.parseInt(scanner.nextLine());
+                correct=true;
+            } catch(NumberFormatException e ){
+                System.out.println("Ingrese un valor numerico valido");
             }
-        }*/
+        }
+        return a;
     }
 }

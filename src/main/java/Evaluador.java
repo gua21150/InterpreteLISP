@@ -1,5 +1,9 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Stack;
+import java.util.Map.Entry;
 
 /**
  * 
@@ -22,7 +26,11 @@ public class Evaluador {
 	 * Convierte el String defun en una lista de nodos (tokens) 
 	 * Funcion a llamar cada vez que se haga un defun
 	 * @param expression: 
-	*/
+	*/	
+	ArrayList<Nodo> a_eval;
+	private Evaluador(){}
+
+	/** Convierte el String defun en una lista de nodos (tokens) */
 	static void defun(ArrayList<String> expression){
 		ArrayList<Nodo> convertido = FuncionesLisp.StringToNodo(expression);
 		ArrayList<Nodo> prueba = FuncionesLisp.pre(convertido,1);
@@ -64,7 +72,7 @@ public class Evaluador {
 	
 	/*
 	static Nodo cond(Nodo expression) {
-		// El primer elemento de expression será cond
+		// El primer elemento de expression serï¿½ cond
 		Nodo respuesta = null;
 		
 		// Verifico que el nodo sea de tipo ArrayList
@@ -110,11 +118,11 @@ public class Evaluador {
 							}
 							
 						} else if (condicion.get(j).getTipo() == 3) {
-							// Entonces hay que evaluar la condición
+							// Entonces hay que evaluar la condiciï¿½n
 							
 							// Utilizar operaciones de comparacion
 							
-							// el primer elemento debe ser un String, operación, para comparar
+							// el primer elemento debe ser un String, operaciï¿½n, para comparar
 							if (condicion.get(j).getArrayListNodo().get(0).getTipo() == 2) {
 								
 								if (condicion.get(j).getArrayListNodo().get(0).getDataS().equals("=")) {
@@ -149,7 +157,7 @@ public class Evaluador {
 					}
 					
 				}else {
-					// Error de sintaxtis, no será posible evaluar
+					// Error de sintaxtis, no serï¿½ posible evaluar
 					return null;
 				}
 
@@ -186,7 +194,7 @@ public class Evaluador {
 		// Se crea una lista de parametros tipo nodo
 		ArrayList <Nodo> parametros1 = new ArrayList <Nodo>();
 		
-		// Recoro los nodos que son parámetros de la expressionj
+		// Recoro los nodos que son parï¿½metros de la expressionj
 		for (int i = 1; i<expression.size(); i++) {
 			
 			// Verifico si el parametro es ArrayList
@@ -202,7 +210,7 @@ public class Evaluador {
 			// Verifico si el nodo es un tipo 2, un String
 			if (expression.get(i).getTipo() == 2) {
 				// Solo ocurre cuando se esta evaluando internamente
-				// El primer elemento de expression1 es el nombre de la funcion principal que se evalúa
+				// El primer elemento de expression1 es el nombre de la funcion principal que se evalï¿½a
 				ArrayList<String> para = parametros.get(expression1.get(0).getDataS());
 				for (int k = 0; k<para.size();k++) {
 					if (para.get(k).equals(expression.get(i).getDataS())) {
@@ -218,7 +226,7 @@ public class Evaluador {
 			// Si es de tipo 1, es un float, no hay que hacerle ajustes
 		}
 		
-		// El primer elemento de expression siempre será el nombre de la función
+		// El primer elemento de expression siempre serï¿½ el nombre de la funciï¿½n
 		// Verifico que el primer elemento es String
 		if (expression.get(0).getTipo() == 2) {
 			// Verifico si es operacion suma 
@@ -266,13 +274,13 @@ public class Evaluador {
 					// Regreso el valor de la evaluacion
 					return resultado;
 				}else {
-					// No se puede evaluar, ya que no se encontró la función
+					// No se puede evaluar, ya que no se encontrï¿½ la funciï¿½n
 					return null;
 				}
 			}
 			
 		}else {
-			// No se puede evaluar sin nombre de la función
+			// No se puede evaluar sin nombre de la funciï¿½n
 			return null;
 		}
 		
@@ -287,7 +295,7 @@ public class Evaluador {
 		// Se crea una lista de parametros tipo nodo
 		ArrayList <Nodo> parametros1 = new ArrayList <Nodo>();
 		
-		// Recoro los nodos que son parámetros de la expression j
+		// Recoro los nodos que son parï¿½metros de la expression j
 		for (int i = 1; i<expression.size(); i++) {
 			
 			// Verifico si el parametro es ArrayList
@@ -304,7 +312,7 @@ public class Evaluador {
 			if (expression.get(i).getTipo() == 2) {
 				
 				// Solo ocurre cuando se esta evaluando internamente
-				// El primer elemento de expression1 es el nombre de la funcion principal que se evalúa
+				// El primer elemento de expression1 es el nombre de la funcion principal que se evalï¿½a
 				ArrayList<String> para = parametros.get(expression1.get(0).getDataS());
 				for (int k = 0; k<para.size();k++) {
 					if (para.get(k).equals(expression.get(i).getDataS())) {
@@ -322,7 +330,7 @@ public class Evaluador {
 			// Si es de tipo 1, es un float, no hay que hacerle ajustes
 		}
 		
-		// El primer elemento de expression siempre será el nombre de la función
+		// El primer elemento de expression siempre serï¿½ el nombre de la funciï¿½n
 		// Verifico que el primer elemento es String
 		if (expression.get(0).getTipo() == 2) {
 			// Verifico si es operacion suma 
@@ -368,24 +376,70 @@ public class Evaluador {
 					// Regreso el valor de la evaluacion
 					return resultado;
 				}else {
-					// No se puede evaluar1, ya que no se encontró la función
+					// No se puede evaluar1, ya que no se encontrï¿½ la funciï¿½n
 					return null;
 				}
 			}
 			
 		}else {
-			// No se puede evaluar1 sin nombre de la función
+			// No se puede evaluar1 sin nombre de la funciï¿½n
 			return null;
 		}
 		
 		
 	}
-	
-	/* ( defun fibonacci (parametro1  parametro1) (+ paramtero1 parametro 2) ) */
-	
-		
-	/*
-	static evaluarUsurio(ArrayList<Nodo> expresion, ArrayList<Nodo> parametros) {
-		
-	}*/
+
+	private static void setQ(Nodo a, Nodo b){
+		switch (b.getTipo()){
+			case 1:
+				variables.put(a.getDataS(), b); // se agrega este valor
+				System.out.println(b.getDataF());
+			break;
+			case 2:
+				variables.put(a.getDataS(), b); // se agrega este valor
+				System.out.println(b.getDataS());
+			break;
+			default:
+				System.out.println("ASIGNACION NO VALIDA");
+			break;
+		}
+	}
+
+	private static Nodo getQ(Nodo a) {
+		if(variables.containsKey(a.getDataS())) {			
+			return variables.get(a.getDataS());
+		} else {
+			return null;
+		}
+	}
+
+	public static Object isQuote(Nodo a) {
+		switch(a.getTipo()) {
+			case 1:
+				System.out.println(a.getDataF());
+				return a.getDataF();				
+			case 2:
+				System.out.println(a.getDataS());
+				return a.getDataS();			
+			case 3:
+				String temp = "";
+				for (Nodo element : a.getArrayListNodo()) {
+					if(element.getTipo()==1){
+						temp += element.getDataF()+" ";
+					} else {
+						if(element.getTipo()==2) {
+							temp += element.getDataS()+" ";
+						} else {
+							if(element.getTipo()==3){
+								isQuote(element);
+							}
+						}
+					}
+				}
+				System.out.println(temp);
+				return temp;		
+			default: 
+				return null;			
+		}
+	}
 }

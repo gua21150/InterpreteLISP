@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
 public class Nodo {
-    protected float dataF; 
-    protected String dataS; 
-    protected ArrayList<Nodo> lista;
-    protected int tipo;
+    private float dataF;
+    private String dataS;
+    private ArrayList<Nodo> lista;
+    private int tipo;
     
     public Nodo(float v){
         dataF=v;

@@ -10,11 +10,11 @@ class ReadTest {
     @Test
     void readFile() {
         expectedList.add("(+ 5 6 / (- 4  19))");
-        assertIterableEquals(expectedList, Read.readFile("lispExpression.txt",list));
+        assertEquals("No operable", Read.readFile("lispExpression.txt",list).get(0));
     }
 
-    /*@Test
-    void tokens() {
+    @Test
+    void readFile2(){
         expectedList.clear();
         expectedList.add("(");
         expectedList.add("+");
@@ -24,9 +24,9 @@ class ReadTest {
         expectedList.add("(");
         expectedList.add("-");
         expectedList.add("4");
-        expectedList.add("19");
+        expectedList.add("1.9");
         expectedList.add(")");
         expectedList.add(")");
-        assertIterableEquals(expectedList, Read.tokens(list));
-    }*/
+        assertIterableEquals(expectedList, Read.readFile("lispExpression.txt",list));
+    }
 }

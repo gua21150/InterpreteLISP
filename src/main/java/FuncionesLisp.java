@@ -1,30 +1,12 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class FuncionesLisp {
-    private ArrayList<Nodo> secuencia = new ArrayList<>();
-    /*
-    private ArrayList<String> sucio = new ArrayList<>();
-    public void operar(){
-        // oh no
-        this.sucio = Read.readFile("lispExpression.txt",sucio);
-
-    }*/
-    
-   // (defun fibonacci (n m) (cond ((= n 1) 1) ((= m 2) 1) (T (+ (fibonacci (- n 1)) (fibonacci (- n 2))))))
-    // (fibonnaci 5)
-    
-    //<key, <key,valor>>
-    //(defun fibonacci (n) (cond ((= n 1) 1) ((= n 2) 1) (T (+ (fibonacci (- n 1)) (fibonacci (- n 2))))))
-
-
-    
-    
+    private ArrayList<Nodo> secuencia = new ArrayList<>();            
     // Necesitamos convertir nuestra lista de tokens (tipo String) en tipo Nodo 
-    // para que entre en la función convert
+    // para que entre en la funciï¿½n convert
     
-    static ArrayList<Nodo> StringToNodo(ArrayList<String> expression){
-    	ArrayList<Nodo> listaNod = new ArrayList<Nodo>();
+    public static ArrayList<Nodo> StringToNodo(ArrayList<String> expression){
+    	ArrayList<Nodo> listaNod = new ArrayList<>();
     	for (String x: expression) {
     		try {
     			float num = Float.parseFloat(x);
@@ -39,22 +21,16 @@ public class FuncionesLisp {
     	return listaNod;
     }
     
-    static ArrayList<Nodo> pre(ArrayList<Nodo> expression, int a){
-    	ArrayList<Nodo> respuesta = new ArrayList<Nodo>();
-    	
-    	
+    public static ArrayList<Nodo> pre(ArrayList<Nodo> expression, int a){
+    	ArrayList<Nodo> respuesta = new ArrayList<>();        	
     	// solo para llamarla la primera vez usamos a=1
     	for (int i = a; i<expression.size(); i++) {
-    		
-    		
     		if (expression.get(i).getTipo() == 1) {
     			respuesta.add(expression.get(i));
-    		}
-    		
+    		}    		
     		// verificar si es string
     		if (expression.get(i).getTipo() == 2) {
-    			String compare = expression.get(i).getDataS();
-    			
+    			String compare = expression.get(i).getDataS();    			
     			//verificar si es (
     			if(compare.equals("(")) {
     				int c = 1; // contador 
@@ -77,9 +53,7 @@ public class FuncionesLisp {
     							}
     						}else {
     							sublista.add(expression.get(i));
-    						}
-   
-    						
+    						}       						
     					}
     					
     					if (expression.get(i).getTipo() == 1) {
@@ -97,10 +71,8 @@ public class FuncionesLisp {
     				
     			}
     		}
-
     		// verificar si es arraylist
-    		if(expression.get(i).getTipo()==3) {
-    			
+    		if(expression.get(i).getTipo()==3) {    			
     		}
     	}
     	

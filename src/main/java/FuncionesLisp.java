@@ -11,7 +11,11 @@ public class FuncionesLisp {
 
     }*/
     
-   // (defun fibonacci (n) (cond ((= n 1) 1) ((= n 2) 1) (T (+ (fibonacci (- n 1)) (fibonacci (- n 2))))))
+   // (defun fibonacci (n m) (cond ((= n 1) 1) ((= m 2) 1) (T (+ (fibonacci (- n 1)) (fibonacci (- n 2))))))
+    // (fibonnaci 5)
+    
+    //<key, <key,valor>>
+    //(defun fibonacci (n) (cond ((= n 1) 1) ((= n 2) 1) (T (+ (fibonacci (- n 1)) (fibonacci (- n 2))))))
 
 
     

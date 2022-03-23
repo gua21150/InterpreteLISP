@@ -4,8 +4,9 @@ import java.util.Stack;
 public class Interprete {
 
     public static void main(String[] args) {
+    	
         ArrayList<String> list = new ArrayList<>();          // lista temporal que recibe la expresión del archivo de texto        
-        Stack stack1 = new Stack();        
+        //Stack stack1 = new Stack();        
         Read.readFile("lispExpression.txt",list);
         int cd = 0;
         for (String str : list) {
@@ -14,6 +15,8 @@ public class Interprete {
         }
         System.out.println(cd);
         
+        
+        
         System.out.println("----------------------------------");
         
         ArrayList<Nodo> convertido = FuncionesLisp.StringToNodo(list);
@@ -21,14 +24,44 @@ public class Interprete {
         ArrayList<Nodo> prueba = FuncionesLisp.pre(convertido,1);
         ArrayList<Nodo> prueba1 = FuncionesLisp.pre1(prueba);
         
-        System.out.println(prueba1.get(5).getArrayListNodo().get(0).getDataS());
+        Evaluador.defun(list);
+        
+        
+        
+        ArrayList<Nodo> temperatura = new ArrayList<Nodo>();
+        Nodo nombre = new Nodo("ftoc");
+        temperatura.add(nombre);
+        
+        float num = 100;
+        Nodo parametro = new Nodo(num);
+        temperatura.add(parametro);
+        
+        
+        /*
+        ArrayList<Nodo> temperatura = new ArrayList<Nodo>();
+        Nodo nombre = new Nodo("+");
+        temperatura.add(nombre);
+        
+        float num = 100;
+        Nodo parametro = new Nodo(num);
+        temperatura.add(parametro);
+        
+        float num1 = 6;
+        Nodo parametro1 = new Nodo(num1);
+        temperatura.add(parametro1);
+        
+        System.out.println(temperatura.get(0).getDataS());
+        */
+        
+        System.out.println(Evaluador.evaluar1(temperatura, temperatura).getDataF());
         
         System.out.println("----------------------------------");
-       
+        System.out.println(prueba1.get(3).getArrayListNodo().get(2).getDataF());
         
+        // (defun ftoc (temp)(/(- temp 32) 1.8))
         //ArrayList<Nodo> tok =  FuncionesLisp.convert(convertido);
         
-        int cont_lista = 0;
+        // int cont_lista = 0;
         /*
         for (Nodo x: prueba) {
             if (x.getTipo()==3) {

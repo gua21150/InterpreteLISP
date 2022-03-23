@@ -2,8 +2,6 @@ import java.util.ArrayList;
 
 public class FuncionesLisp {
     private ArrayList<Nodo> secuencia = new ArrayList<>();            
-    // Necesitamos convertir nuestra lista de tokens (tipo String) en tipo Nodo 
-    // para que entre en la funci�n convert
     
     public static ArrayList<Nodo> StringToNodo(ArrayList<String> expression){
     	ArrayList<Nodo> listaNod = new ArrayList<>();

@@ -387,7 +387,7 @@ public class Evaluador {
 		}
 		
 		
-	}
+	}	
 
 	private static void setQ(Nodo a, Nodo b){
 		switch (b.getTipo()){

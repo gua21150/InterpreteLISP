@@ -1,6 +1,6 @@
 public class OperacionesBasicas {
 	// -------------- Operaciones aritmeticas
-	
+	private OperacionesBasicas(){}
 	// suma dos numeros
 	static float suma(float a, float b) {
 		return a+b;
